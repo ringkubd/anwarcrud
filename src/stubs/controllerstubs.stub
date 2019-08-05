@@ -1,0 +1,30 @@
+<?php
+
+namespace @namespace;
+
+use Illuminate\Http\Request;
+use DB;
+@use
+
+class @class extends Controller
+{
+    protected $validationRule = "@validationRule";
+
+    protected $tableFieldName = "@tableFieldName";
+
+    protected $formDisplay = "@formDisplay";
+
+    protected $table = "@table";
+
+    protected $select = "@select";
+
+    protected $join = "@join";
+
+    private function buildQuery(){
+        $query = DB::select(DB::raw("SELECT $this->select from $this->table"));
+    }
+
+    public function index(){
+        return dump($this->buildQuery());
+    }
+}

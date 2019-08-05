@@ -1,0 +1,32 @@
+{
+    "name": "anwar/crud-generator",
+    "description": "Simple crud generate by database table..",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "anwar",
+            "email": "ajr.jahid@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Anwar\\": "src/"
+        },
+        "files": [
+            "src/constants.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Anwar\\CrudGenerator\\AnwarCrudGeneratorProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    }
+}
