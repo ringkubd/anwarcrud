@@ -20,11 +20,31 @@ class @class extends Controller
 
     protected $join = "@join";
 
+    protected $class = "@class";
+
+    protected $route =  "@class";
+
     private function buildQuery(){
-        $query = DB::select(DB::raw("SELECT $this->select from $this->table"));
+        $alias = substr($this->table,0,5);
+        $id =  $alias.".id";
+        $query = DB::select(DB::raw("SELECT $id,$this->select from $this->table as $alias $this->join"));
+        return collect($query);
     }
 
     public function index(){
-        return dump($this->buildQuery());
+        $data["content"] = $this->buildQuery();
+        $data["titile"] = ucwords(implode(" ",explode('_', $this->table)));
+        $data["thead"] = explode(",",str_replace("'","",$this->tableFieldName));
+        $viewDirectory = $this->class.".index";
+        $data["script"] = $this->jScript();
+        $data["route"] = $this->route;
+        return view($viewDirectory, compact("data"));
+    }
+
+    public function edit($id){
+    }
+
+    protected function jScript(){
+
     }
 }

@@ -13,5 +13,19 @@ return[
         "number"=>"required|number",
     ],
     "module_table"=>"anwarcrud_module",
-    "except_column"=>["id", "created_at", "updated_at"]
+    "except_column"=>["id", "created_at", "updated_at"],
+    "inputtype"=>[
+        "checkbox",
+        "datetime",
+        "email",
+        "file",
+        "hidden",
+        "image",
+        "password",
+        "radio",
+        "text",
+        "time",
+        "select",
+        "select2",
+    ]
 ];

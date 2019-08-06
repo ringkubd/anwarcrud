@@ -63,11 +63,11 @@
                             <th>Name</th>
                             <th>Type</th>
                             <th>Validation</th>
-                            <th>OnChange</th>
                             <th>Source Table</th>
+                            <th>OnChange</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="form-display">
 
                         </tbody>
                     </table>
@@ -103,13 +103,15 @@
                 }else {
                     app.siblings(".error").html("")
                     if (app.parent().parent().hasClass("step1")){
-                        getValidationForm(table,"#table-display");
+                        getTableDisplay(table,"#table-display");
 
                         $("#step2-tab").tab("show");
                     }else if (app.parent().parent().hasClass("step2")){
                         //app.parent().parent().hide();
                         app.parent().parent().siblings(".step3").show();
                         console.log(app.parent().parent().siblings(".step3"))
+                        getFormDisplay(table,"#form-display");
+                        $("#step3-tab").tab("show");
                     }
 
                 }
@@ -120,7 +122,7 @@
                 return target.split(search).join(replacement);
             };
 
-            var getValidationForm = function (tablename,selector) {
+            var getTableDisplay = function (tablename,selector) {
                 $.ajax({
                     url: "{{url('getColumns')}}",
                     method: "post",
@@ -133,6 +135,22 @@
                     //doc =  data.replaceAll("n","");
                     $("#table-display").html("")
                     $("#table-display").html(doc)
+                })
+            }
+
+            var getFormDisplay = function (tablename,selector) {
+                $.ajax({
+                    url: "{{url('getFormView')}}",
+                    method: "post",
+                    data: {
+                        __token: '{{csrf_token()}}',
+                        table: tablename
+                    }
+                }).done(function (data) {
+                    doc =  data.replaceAll("\\n","").replaceAll("\\","");
+                    //doc =  data.replaceAll("n","");
+                    $("#form-display").html("")
+                    $("#form-display").html(doc)
                 })
             }
 

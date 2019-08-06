@@ -1,0 +1,34 @@
+@extends("CRUDGENERATOR::layouts.admin")
+@section("content")
+<div class="table-responsive">
+<table id="datatable" class="table table-striped">
+<thead>
+<tr>
+@forelse($data["thead"] as $th)
+<th class="{{$th}}">{{ucwords($th)}}</th>
+@empty
+@endforelse
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+@forelse($data['content'] as $content)
+<tr>
+@forelse($data["thead"] as $th)
+<td>{!! $content->{$th} ?? null !!}</td>
+@empty
+@endforelse
+<td><a class="btn btn-warning" href="{{url($data['route']."/".$content->id."/edit")}}">Edit</a></td>
+</tr>
+@empty
+
+@endforelse
+</tbody>
+</table>
+
+</div>
+@endsection
+
+@section("scripts")
+{!! $data['script'] !!}
+@endsection

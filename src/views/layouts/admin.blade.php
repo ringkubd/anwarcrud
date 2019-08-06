@@ -180,6 +180,12 @@
 
   $.fn.dataTable.ext.classes.sPageButton = '';
 });
+        $("#datatable").dataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
 
     </script>
     @yield('scripts')
