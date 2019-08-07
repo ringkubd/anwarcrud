@@ -1,0 +1,15 @@
+<?php
+
+namespace @modelNameSpace;
+
+use Illuminate\Database\Eloquent\Model;
+@modelUse
+
+class @modelName extends Model
+{
+    protected $table = "@modeltable";
+
+    protected $fillable = @modelFillable;
+
+    @modelrelation
+}

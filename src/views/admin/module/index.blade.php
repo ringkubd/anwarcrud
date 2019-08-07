@@ -151,6 +151,7 @@
                     //doc =  data.replaceAll("n","");
                     $("#form-display").html("")
                     $("#form-display").html(doc)
+                    console.log(data)
                 })
             }
 

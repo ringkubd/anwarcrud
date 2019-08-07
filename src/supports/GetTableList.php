@@ -125,7 +125,6 @@ EOT;
 
     public function makeValidationForm(){
         $columns = $this->columns;
-
         $tr = "";
 
         foreach ($columns as $clmns => $datatype){
@@ -138,16 +137,17 @@ EOT;
             $inptyp = "";
             foreach ($inputtype as $intp){
                 $optionLabel = ucwords($intp);
-                $inptyp .= "<option value='$intp'>$optionLabel</option>";
+                $selected = $datatyp == $intp || $datatype == $intp ?"selected":"";
+                $inptyp .= "<option $selected  value='$intp'>$optionLabel</option>";
             }
-            $validationRule = config("anwarcrud.validationrule.$datatyp");
+            $validationRule = config("anwarcrud.validationrule.$datatyp","required");
 
-            $input = "<input type='text' class='form-control' name='name[$clmns]' id='$clmns' value='$clmns'/>";
+            $input = "<input type='text' class='form-control' name='third[name][$clmns]' id='$clmns' value='$clmns'/>";
 
             $form = <<<EOT
 <tr class='$clmns'>
 <td>
-<input type="text" name="label[$clmns]" class="form-control" value="$label">
+<input type="text" name="third[label][$clmns]" class="form-control" value="$label">
 </td>
 <td>
 <div class='form-group md-5'>
@@ -155,19 +155,19 @@ $input
 </div>
 </td>
 <td>
-<select name="type[$clmns][]" id="$clmns._type" class='form-control'>
+<select name="third[type][$clmns]" id="$clmns._type" class='form-control'>
 $inptyp
 </select>
 </td>
 <td>
-<input type='text' name='validationrule[$clmns]' class='form-control' value='$validationRule'>
+<input type='text' name='third[validationrule][$clmns]' class='form-control' value='$validationRule'>
 </td>
 <td>
-<input type="text" value="" class='form-control mb-2' name="relation[$clmns]">
+<input type="text" value="" class='form-control mb-2' name="third[relation][$clmns]">
 <span class="text-info font-italic font-weight-lighter">Example: Users,id,name. Where table =  users, id =  local key , name show on options</span>
 </td>
 <td>
-<input type="text" value="" class='form-control' name="onchange[$clmns]">
+<input type="text" value="" class='form-control' name="third[onchange][$clmns]">
 </td>
 </tr>
 EOT;

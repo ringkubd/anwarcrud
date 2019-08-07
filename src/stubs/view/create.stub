@@ -1,0 +1,4 @@
+@extends("CRUDGENERATOR::layouts.admin")
+@section("content")
+@include($data)
+@endsection

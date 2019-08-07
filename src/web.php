@@ -23,7 +23,7 @@ if (!function_exists("makeRoute")){
                         case "patch":
                             Route::patch($modulename."/$meth",$classfile."@$meth");
                         case "post":
-                            Route::patch($modulename."/$meth",$classfile."@$meth");
+                            Route::post($modulename."/$meth",$classfile."@$meth");
                         case "get":
                             if ($meth ==  "edit"){
                                 Route::get($modulename."/{id}"."/$meth",$classfile."@$meth");

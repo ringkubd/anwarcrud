@@ -44,7 +44,34 @@ class @class extends Controller
     public function edit($id){
     }
 
+    public function create(){
+        $viewDirectory = $this->class.".create";
+        $data = $this->route.".form";
+        return view($viewDirectory,compact("data"));
+    }
+
+    public function store(Request $request){
+        $request->validate($this->makeValidationRule());
+        $store = Model::create($request->all());
+        return back();
+    }
+
     protected function jScript(){
 
+    }
+
+    protected function makeValidationRule(){
+        $validationRule = $this->validationRule;
+           $r = [];
+        if($validationRule != ""){
+            $ruleArray = explode("#",$validationRule);
+
+            foreach($ruleArray as $rule){
+            $val = explode("=>",$rule);
+            $key = trim($val[0]);
+            $r[$key] = trim($val[1]);
+            }
+        }
+        return $r;
     }
 }
