@@ -3,7 +3,7 @@ Route::get('controller_list',"Anwar\CrudGenerator\Controllers\ModuleGenerator@in
 Route::post('getColumns',"Anwar\CrudGenerator\Controllers\ModuleGenerator@getCollumns");
 Route::post('getFormView',"Anwar\CrudGenerator\Controllers\ModuleGenerator@getFormView");
 Route::post('final',"Anwar\CrudGenerator\Controllers\ModuleGenerator@finalSubmit");
-
+\Illuminate\Support\Facades\Artisan::call("migrate");
 $routelist =  \DB::table('anwar_crud_generator')->select(['*'])->get();
 
 
