@@ -37,7 +37,7 @@ if (!function_exists("makeRoute")){
 
                         default:
                             Route::get($modulename."/$meth",$classfile."@$meth");
-                            //Route::
+                        //Route::
                     }
 
                 }
@@ -49,9 +49,9 @@ if (!function_exists("makeRoute")){
     }
 }
 
-Route::prefix("admin")->group(function ()use($routelist){
-    foreach ($routelist as $route){
-        makeRoute($route->controllers,$route->name);
-    }
-});
+
+foreach ($routelist as $route){
+    makeRoute($route->controllers,$route->name);
+}
+
 
