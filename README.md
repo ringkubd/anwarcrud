@@ -1,1 +1,1 @@
-# Laravel Auto Generated CRUD
+# Laravel Auto CRUD Generator
