@@ -12,7 +12,7 @@ $method = ["index"=>"get","create"=>"get","store"=>"post","edit"=>"get","delete"
 if (!function_exists("makeRoute")){
     function makeRoute($class,$modulename){
         $classfile = "\\App\\Http\Controllers\\".$class;
-        $method = ["index"=>"get","create"=>"get","store"=>"post","edit"=>"get","delete"=>"get"];
+        $method = ["index"=>"get","create"=>"get","store"=>"post","edit"=>"get","delete"=>"delete","update"=>"update"];
         $route =  new Route();
         if (class_exists($classfile)){
             foreach (array_keys($method) as $meth){
@@ -30,6 +30,11 @@ if (!function_exists("makeRoute")){
                             }else{
                                 Route::get($modulename."/$meth",$classfile."@$meth");
                             }
+                        case "update":
+                            Route::post($modulename."/{id}"."/$meth",$classfile."@$meth");
+                        case "delete":
+                            Route::get($modulename."/{id}"."/$meth",$classfile."@$meth");
+
                         default:
                             Route::get($modulename."/$meth",$classfile."@$meth");
                             //Route::
@@ -44,7 +49,9 @@ if (!function_exists("makeRoute")){
     }
 }
 
+Route::prefix("admin")->group(function ()use($routelist){
+    foreach ($routelist as $route){
+        makeRoute($route->controllers,$route->name);
+    }
+});
 
-foreach ($routelist as $route){
-    makeRoute($route->controllers,$route->name);
-}

@@ -16,7 +16,6 @@ class AnwarCrudGenerator extends Migration
         Schema::create(TABLE_NAME, function (Blueprint $table) {
             $table->bigIncrements("id");
             $table->string("name",255);
-            $table->string("table_name");
             $table->string("controllers",255);
             $table->string("methods",255);
             $table->string("uri",255);

@@ -41,18 +41,38 @@ class @class extends Controller
         return view($viewDirectory, compact("data"));
     }
 
-    public function edit($id){
-    }
 
     public function create(){
         $viewDirectory = $this->class.".create";
         $data = $this->route.".form";
-        return view($viewDirectory,compact("data"));
+        $model = new Model();
+        $action = "store";
+        return view($viewDirectory,compact("data","model","action"));
     }
 
     public function store(Request $request){
         $request->validate($this->makeValidationRule());
         $store = Model::create($request->all());
+        return back();
+    }
+
+
+    public function edit($id){
+        $model = Model::find($id);
+        $viewDirectory = $this->class.".edit";
+        $data = $this->route.".form";
+        $action = "update";
+        return view($viewDirectory,compact("model","data","action"));
+    }
+
+    public function update(Request $request,$id){
+        $request->validate($this->makeValidationRule());
+        $update = Model::find($id)->update($request->all());
+        return back();
+    }
+
+    public function delete($id){
+        $model = Model::destroy($id);
         return back();
     }
 

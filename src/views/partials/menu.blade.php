@@ -10,6 +10,7 @@
                     {{ trans('global.dashboard') }}
                 </a>
             </li>
+
             <li class="nav-item nav-dropdown">
                 <a class="nav-link  nav-dropdown-toggle">
                     <i class="fas fa-users nav-icon">

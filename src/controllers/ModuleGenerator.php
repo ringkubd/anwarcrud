@@ -104,21 +104,16 @@ class ModuleGenerator extends Controller
             "third.name.*"=>"required",
             "third.type.*"=>"required",
         ]);
-
         $this->formDisplay = $request->third["label"];
         $this->validationRule = $request->third["validationrule"];
         $this->formRelation = $request->third["relation"];
         $this->formOnchange = $request->third["onchange"];
         $this->formType = $request->third["type"];
-
         $this->validationRule = implode("#",$this->makeKeyValueString($request->third["validationrule"]));
-
         //return dump($request->all());
 
         $this->table = $request->table;
-
         $this->class =  str_replace(" ","",ucwords(str_replace("_"," ",$request->module_name)));
-
         $this->tablealies();
         $alias = substr($this->table,0,5);
         $join = null;
@@ -127,35 +122,29 @@ class ModuleGenerator extends Controller
         }
 
         $this->select = $alias.".".implode(",$alias.",$request->clumn).$join.implode(",",array_filter($request->selectjoin));
-
-        $this->tableFieldName = implode(",",$request->clumn).$join.implode(",",array_filter($request->selectjoin));
+        $this->tableFieldName = implode(",",$request->clumn);
         $this->join = implode(" ",array_filter($request->join));
-
         $this->use = "use " . $this->modelNameSpace.'\\'.$this->class." as Model;";
 
         //** Model */
         $this->modelName = $this->class;
-
         $this->modelFillable = "['".implode("','",$request->clumn)."']";
-
         $this->modelUse = $this->modelUse();
-
         $this->modeltable = $this->table;
-
         $this->modelrelation = null;
 
-
-
-        //AnwarCrud::where("controllers",$this->class)->orWhere("")
-        DB::table("anwar_crud_generator")->insert([
+        AnwarCrud::updateOrCreate([
+            "name"=>$this->class,
+            "controllers"=>$this->class
+        ], [
             "name"=>$this->class,
             "controllers"=>$this->class,
-            "uri"=>$this->table,
+            "uri"=>$this->table
         ]);
+
         $final = $this->getStub()->tablealies()->getAllVariabel()->createView()->createModel()->createController();
 
         return dump($final);
-
     }
 
     /**
@@ -180,7 +169,6 @@ class ModuleGenerator extends Controller
             file_put_contents($viewPath."//$key.blade.php",$stubContent);
         }
         return $this;
-
     }
 
     /**
@@ -194,31 +182,29 @@ class ModuleGenerator extends Controller
         $formInput = $this->formDisplay;
         $formType = $this->formType;
         $formRelation = $this->formRelation;
+        $model = '$model';
         $div = "";
         foreach ($formInput as $key => $value){
             $div .= "<div class='form-group'>";
             $label = ucwords(str_replace("_"," ",$key));
-            $div .= "<label for='$key'>$label</label>";
+            $div .= "<label for='$key'>$label</label>\n";
 
             if (array_key_exists($key,$formRelation) && $formRelation[$key] != null && $this->relationalField() != ""){
                 $div .= $this->relationalField();
                 unset($formType[$key]);
             }else if($formType[$key] == "textarea"){
-                $div .= "<textarea class='form-control' name='$key'></textarea>";
+                $div .= "<textarea class='form-control' name='$key'>{{@$model->$key}}</textarea>\n";
             }else{
-                $div .= "<input type='$formType[$key]' class='form-control' name='$key'/>";
+                $div .= "<input type='$formType[$key]' class='form-control' name='$key' value='{{@$model->$key}}'>\n";
             }
-            //$div .= "<input type='$formType[$key]' class='form-control' name='$key'/>";
-            $div .= "</div>";
+            $div .= "</div>\n";
         }
-        $div .= "<div class='form-group'><input type='submit' class='btn btn-success' value='Submit'></div>";
-
+        $div .= "<div class='form-group'>\n<input type='submit' class='btn btn-success' value='Submit'>\n</div>";
         if (!file_exists($formStub)){
             touch($formStub);
         }
         $stubFileContent = file_get_contents($formStub);
         $newContent = str_replace("@form",$div,$stubFileContent);
-        //file_put_contents($formStub,$newContent);
         return $newContent;
     }
 
@@ -228,7 +214,6 @@ class ModuleGenerator extends Controller
 
     public function createModel(){
         $model = ANWAR_CRUD_STUBS_PATH."/model.stub";
-
         if (file_exists($model)){
             $modelDefaultContent = file_get_contents($model);
             $getAllVariable = [];
@@ -246,7 +231,6 @@ class ModuleGenerator extends Controller
                 }
             }
             //dd($modelDefaultContent);
-
             if (!file_exists(app_path("AnwarCrudGenerator"))){
                 mkdir(app_path("AnwarCrudGenerator"));
             }
@@ -273,11 +257,8 @@ class ModuleGenerator extends Controller
                 $table = $relationInfo[0];
                 unset($relationInfo[0]);
                 $select = $relationInfo;
-
                 $relationalOption .= $this->makeOption($table, $select);
-
                 $relationalOption .= "</select>";
-
             }
         }
         return $relationalOption;
@@ -324,7 +305,6 @@ class ModuleGenerator extends Controller
         $pattern = '~(@\w+)~';
         preg_match_all($pattern,$stubFileContent,$this->stubVariable,PREG_PATTERN_ORDER);
         return $this;
-
     }
 
     /**

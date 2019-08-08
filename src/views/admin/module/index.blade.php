@@ -9,10 +9,10 @@
                 <a class="nav-link active" id="step1-tab" data-toggle="tab" href="#step1" role="tab" aria-controls="home" aria-selected="true">Module Information</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="step2-tab" data-toggle="tab" href="#step2" role="tab" aria-controls="profile" aria-selected="false">Table Display</a>
+                <a class="nav-link disabled" id="step2-tab" data-toggle="tab" href="#step2" role="tab" aria-controls="profile" aria-selected="false">Table Display</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="step3-tab" data-toggle="tab" href="#step3" role="tab" aria-controls="contact" aria-selected="false">Form Display</a>
+                <a class="nav-link disabled" id="step3-tab" data-toggle="tab" href="#step3" role="tab" aria-controls="contact" aria-selected="false">Form Display</a>
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
@@ -104,13 +104,13 @@
                     app.siblings(".error").html("")
                     if (app.parent().parent().hasClass("step1")){
                         getTableDisplay(table,"#table-display");
-
+                        $("#step2-tab").removeClass("disabled");
                         $("#step2-tab").tab("show");
                     }else if (app.parent().parent().hasClass("step2")){
-                        //app.parent().parent().hide();
                         app.parent().parent().siblings(".step3").show();
                         console.log(app.parent().parent().siblings(".step3"))
                         getFormDisplay(table,"#form-display");
+                        $("#step3-tab").removeClass("disabled");
                         $("#step3-tab").tab("show");
                     }
 
@@ -132,7 +132,6 @@
                     }
                 }).done(function (data) {
                     doc =  data.replaceAll("\\n","").replaceAll("\\","");
-                    //doc =  data.replaceAll("n","");
                     $("#table-display").html("")
                     $("#table-display").html(doc)
                 })
@@ -151,13 +150,13 @@
                     //doc =  data.replaceAll("n","");
                     $("#form-display").html("")
                     $("#form-display").html(doc)
-                    console.log(data)
                 })
             }
 
             $(document).on("change","#table",function () {
                 $("#module_name").val($(this).val())
             })
+
 
 
         });

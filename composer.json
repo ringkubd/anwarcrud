@@ -16,7 +16,8 @@
             "Anwar\\": "src/"
         },
         "files": [
-            "src/constants.php"
+            "src/constants.php",
+            "src/supports/Helper.php"
         ]
     },
     "extra": {

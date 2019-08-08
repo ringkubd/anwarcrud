@@ -1,4 +1,10 @@
 @extends("CRUDGENERATOR::layouts.admin")
 @section("content")
-
+<button onclick="window.history.back()" class="btn btn-sm btn-linkedin" title="Go to previous page">
+        <i class="fa fa-arrow-left"></i>
+  </button>
+  <button onclick="window.history.forward()" class="btn btn-sm btn-linkedin" title="Go to next page">
+        <i class="fa fa-arrow-right"></i>
+  </button>
+@include($data)
 @endsection

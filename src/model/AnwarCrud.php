@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AnwarCrud extends Model
 {
-    protected $table = MODULE_TABLE;
+    protected $table = TABLE_NAME;
+
+    protected $fillable = ["name","controllers","uri"];
 }
