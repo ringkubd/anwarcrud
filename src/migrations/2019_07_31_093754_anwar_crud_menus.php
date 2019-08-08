@@ -13,7 +13,7 @@ class AnwarCrudGenerator extends Migration
      */
     public function up()
     {
-        Schema::create(TABLE_NAME, function (Blueprint $table) {
+        Schema::create(ANWAR_CRUD_MENUS, function (Blueprint $table) {
             $table->bigIncrements("id");
             $table->string("name",255);
             $table->string("controllers",255);

@@ -5,8 +5,10 @@ namespace Anwar\CrudGenerator\Controllers;
 use Anwar\CrudGenerator\Supports\GetTableList;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Anwar\CrudGenerator\Model\AnwarCrud;
+use Symfony\Component\Console\Output\BufferedOutput;
 
 class ModuleGenerator extends Controller
 {
@@ -105,6 +107,12 @@ class ModuleGenerator extends Controller
             'third.name.*' => 'required',
             'third.type.*' => 'required',
         ]);
+        if (!file_exists(ANWAR_CRUD_BASE_PATH. '/installed')){
+            $output = new BufferedOutput;
+            Artisan::call('vendor:publish',['--provider'=>'Anwar\CrudGenerator\AnwarCrudGeneratorProvider'],$output);
+            Artisan::call('migrate',['--path'=>'database/migrations/2019_07_31_093754_anwar_crud_generator.php'],$output);
+            touch(ANWAR_CRUD_BASE_PATH. '/installed');
+        }
         $this->formDisplay = $request->third['label'];
         $this->validationRule = $request->third['validationrule'];
         $this->formRelation = $request->third['relation'];
@@ -375,7 +383,7 @@ class ModuleGenerator extends Controller
 
     private function modelUse()
     {
-        return "";
+        return '';
     }
 
 
