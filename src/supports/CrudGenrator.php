@@ -17,12 +17,14 @@ class CrudGenrator
      */
     private $table = "";
 
-    public function createModule(Request $request){
+    public function createModule(Request $request): void
+    {
         $this->controller_name = $request->controller;
         $this->table = $request->table;
     }
 
-    public function create_controller(){
+    public function create_controller(): void
+    {
         $artisan = Artisan::call("make:model $this->controller_name --cr");
     }
 

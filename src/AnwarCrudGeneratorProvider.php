@@ -35,12 +35,12 @@ class AnwarCrudGeneratorProvider extends ServiceProvider
         /**
          * @desc Register Artisan console commands
          */
-       if ($this->app->runningInConsole()){
-            $this->commands([
-                CrudGeneratorCommand::class,
-                CreateModuleCommand::class
-            ]);
-       }
+//       if ($this->app->runningInConsole()){
+//            $this->commands([
+//                CrudGeneratorCommand::class,
+//                CreateModuleCommand::class
+//            ]);
+//       }
 
         /**
          * @desc Register Configs file

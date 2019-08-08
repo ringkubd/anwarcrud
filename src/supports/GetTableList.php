@@ -25,7 +25,7 @@ class GetTableList
         $this->connection = DB::connection();
         // Check connection
         if (!$this->connection) {
-            die("Connection failed: ");
+            die('Connection failed: ');
         }
     }
 
@@ -35,10 +35,10 @@ class GetTableList
 
     public function getTableFromDB(){
         $tables =  $this->connection->select("SHOW TABLES");
-        $key = "Tables_in_".DB::getDatabaseName();
+        $key = 'Tables_in_' .DB::getDatabaseName();
 
         foreach ($tables as $tab){
-            if($tab->{$key} != TABLE_NAME && $tab->{$key} != "migrations"){
+            if($tab->{$key} != TABLE_NAME && $tab->{$key} !== 'migrations'){
                 $this->tables[] = $tab->{$key};
             }
         }
@@ -48,8 +48,9 @@ class GetTableList
     /**
      * @return string
      */
-    public function makeOption(){
-        $options = "<option></option>";
+    public function makeOption(): string
+    {
+        $options = '<option></option>';
         $tables = $this->tables;
 
         foreach ($tables as $table){
@@ -64,13 +65,14 @@ class GetTableList
      * @return $this
      */
 
-    public function getCollumns($table){
+    public function getCollumns($table): self
+    {
         $databaseName = DB::getDatabaseName();
         $columns = DB::select(DB::raw("select * from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='$table' and TABLE_SCHEMA='$databaseName'"));
-        $exceptColumn = config("anwarcrud.except_column",[]);
+        $exceptColumn = config('anwarcrud.except_column',[]);
         if ($columns){
             foreach ($columns as $clmn){
-                if (!in_array($clmn->COLUMN_NAME, $exceptColumn)){
+                if (!in_array($clmn->COLUMN_NAME, $exceptColumn, false)){
                     $this->columns[$clmn->COLUMN_NAME] = $clmn->DATA_TYPE;
                 }
             }
@@ -82,12 +84,13 @@ class GetTableList
      * @return string
      */
 
-    public function makeTableView(){
+    public function makeTableView(): string
+    {
         $columns = $this->columns;
-        $tr = "";
+        $tr = '';
         foreach ($columns as $clmns => $datatype){
 
-            $label  = ucwords(str_replace('_'," ", $clmns));
+            $label  = ucwords(str_replace('_', ' ', $clmns));
             $configKey = "anwarcrud.datatype.$datatype";
             $datatyp = config($configKey);
             $validationRule = config("anwarcrud.validationrule.$datatyp");
@@ -123,24 +126,25 @@ EOT;
      * @return string
      */
 
-    public function makeValidationForm(){
+    public function makeValidationForm(): string
+    {
         $columns = $this->columns;
-        $tr = "";
+        $tr = '';
 
         foreach ($columns as $clmns => $datatype){
 
-            $label  = ucwords(str_replace('_'," ", $clmns));
+            $label  = ucwords(str_replace('_', ' ', $clmns));
             $configKey = "anwarcrud.datatype.$datatype";
             $datatyp = config($configKey);
-            $inputtype = config("anwarcrud.inputtype",[]);
+            $inputtype = config('anwarcrud.inputtype',[]);
 
-            $inptyp = "";
+            $inptyp = '';
             foreach ($inputtype as $intp){
                 $optionLabel = ucwords($intp);
-                $selected = $datatyp == $intp || $datatype == $intp ?"selected":"";
+                $selected = $datatyp == $intp || $datatype == $intp ? 'selected' : '';
                 $inptyp .= "<option $selected  value='$intp'>$optionLabel</option>";
             }
-            $validationRule = config("anwarcrud.validationrule.$datatyp","required");
+            $validationRule = config("anwarcrud.validationrule.$datatyp", 'required');
 
             $input = "<input type='text' class='form-control' name='third[name][$clmns]' id='$clmns' value='$clmns'/>";
 

@@ -8,5 +8,5 @@ class AnwarCrud extends Model
 {
     protected $table = TABLE_NAME;
 
-    protected $fillable = ["name","controllers","uri"];
+    protected $fillable = ['name', 'controllers', 'uri'];
 }
