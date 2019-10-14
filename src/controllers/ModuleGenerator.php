@@ -267,8 +267,9 @@ class ModuleGenerator extends Controller
     {
         $relation = $this->formRelation;
         $relationalOption = "";
+        
         foreach ($relation as $key=>$value){
-            if ($value !== null || $value !== ""){
+            if ($value !== null && $value !== ""){
                 $relationInfo = explode(",",$value);
                 $relationalOption .= "<select class='form-control' id='$key' name='$key'>";
                 $table = $relationInfo[0];
