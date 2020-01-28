@@ -31,8 +31,6 @@
         }
     },
     "scripts": {
-        "migrate": [
-            #"php artisan migrate --path='./migrations/2019_07_31_093754_anwar_crud_generator.php'"
-        ]
+        
     }
 }
