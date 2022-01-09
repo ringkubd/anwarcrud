@@ -28,14 +28,14 @@ class AnwarCrudGeneratorProvider extends ServiceProvider
     public function boot()
     {
         //
-        $this->loadMigrationsFrom(__DIR__. '/migrations');
+        $this->loadMigrationsFrom(__DIR__. '/Migrations');
         $this->loadViewsFrom(__DIR__. '/views', 'CRUDGENERATOR');
         $this->publishes([
             __DIR__.'/assets' => public_path('vendor/crudgenerator'),
         ], 'CRUDGENERATOR');
 
         $this->publishes([
-            __DIR__.'/migrations'=> database_path('migrations')
+            __DIR__.'/Migrations'=> database_path('migrations')
         ],'CRUDGENERATOR');
 
         /**
@@ -43,9 +43,9 @@ class AnwarCrudGeneratorProvider extends ServiceProvider
          */
 
         $configFile = [];
-        foreach (new \DirectoryIterator(__DIR__.'/configs') as $file){
+        foreach (new \DirectoryIterator(__DIR__.'/Configs') as $file){
             if ($file->isFile()){
-                $configFile[__DIR__. '/configs/' .$file->getFilename()] = config_path($file->getFilename());
+                $configFile[__DIR__. '/Configs/' .$file->getFilename()] = config_path($file->getFilename());
             }
         }
 
