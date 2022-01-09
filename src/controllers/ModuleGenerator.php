@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Anwar\CrudGenerator\Model\AnwarCrud;
 use Symfony\Component\Console\Output\BufferedOutput;
 
-class ModuleGenerator extends Controller
+class ModuleGenerator extends \App\Http\Controllers\Controller
 {
     /**
      * @var
