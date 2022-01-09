@@ -17,7 +17,7 @@
         },
         "files": [
             "src/constants.php",
-            "src/supports/Helper.php"
+            "src/Supports/Helper.php"
         ]
     },
     "extra": {
