@@ -1,5 +1,6 @@
 {
     "name": "anwar/crud-generator",
+    "version": "0.0.3",
     "description": "Simple crud generate by database table..",
     "type": "library",
     "license": "MIT",

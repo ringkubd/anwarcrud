@@ -6,7 +6,7 @@ Route::post("final","Anwar\CrudGenerator\Controllers\ModuleGenerator@finalSubmit
 
 if (file_exists(ANWAR_CRUD_BASE_PATH."/installed")){
 
-    $routelist =  \DB::select(\DB::raw("select * from anwar_crud_generator"));
+    $routelist =  \DB::select("select * from anwar_crud_generator");
 
 
     $method = ["index"=>"get","create"=>"get","store"=>"post","edit"=>"get","delete"=>"get"];
