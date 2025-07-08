@@ -2,8 +2,6 @@
 
 namespace Anwar\CrudGenerator;
 
-use Anwar\CrudGenerator\Commands\CrudGeneratorCommand;
-use Anwar\CrudGenerator\Commands\CreateModuleCommand;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\ServiceProvider;
 
