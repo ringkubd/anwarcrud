@@ -8,11 +8,11 @@
         {
             "name": "Anwar",
             "email": "ajr.jahid@gmail.com",
-            "homepage": "https://github.com/anwar",
+            "homepage": "https://github.com/ringkubd",
             "role": "Developer"
         }
     ],
-    "homepage": "https://github.com/anwar/crud-generator",
+    "homepage": "https://github.com/ringkubd/crud-generator",
     "keywords": [
         "laravel",
         "crud",

@@ -639,10 +639,10 @@ This package is open-source software licensed under the [MIT License](LICENSE).
 
 ## Support
 
-- **Documentation**: [GitHub Wiki](https://github.com/anwar/crud-generator/wiki)
-- **Issues**: [GitHub Issues](https://github.com/anwar/crud-generator/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/anwar/crud-generator/discussions)
-- **Email**: support@anwarcrudgenerator.com
+- **Documentation**: [GitHub Wiki](https://github.com/ringkubd/crud-generator/wiki)
+- **Issues**: [GitHub Issues](https://github.com/ringkubd/crud-generator/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/ringkubd/crud-generator/discussions)
+- **Email**: support@ringkubd.com
 
 ---
 
