@@ -12,7 +12,7 @@
             "role": "Developer"
         }
     ],
-    "homepage": "https://github.com/ringkubd/anwarcrud",
+    "homepage": "https://github.com/ringkubd/crud-generator",
     "keywords": [
         "laravel",
         "crud",
