@@ -1,3 +1,4 @@
+
 <?php
 
 namespace @modelNameSpace;
@@ -5,11 +6,19 @@ namespace @modelNameSpace;
 use Illuminate\Database\Eloquent\Model;
 @modelUse
 
+/**
+ * Class @modelName
+ *
+ * @package @modelNameSpace
+ * @property int $id
+@modelDocProperties
+ */
 class @modelName extends Model
 {
     protected $table = "@modeltable";
 
     protected $fillable = @modelFillable;
 
-    @modelrelation
+@modelSoftDeletes
+@modelrelation
 }

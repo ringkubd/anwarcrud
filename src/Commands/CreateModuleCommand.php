@@ -3,9 +3,6 @@
 namespace Anwar\CrudGenerator\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
-use Symfony\Component\Console\Input\InputArgument;
-
 
 class CreateModuleCommand extends Command
 {
@@ -14,37 +11,14 @@ class CreateModuleCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'crudgenerator:make {module}';
+    protected $signature = 'anwar:module {name : The name of the module}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
-
-    /**
-     * @var
-     */
-    protected $getStub;
-    /**
-     * @var
-     *
-     */
-
-    protected $defaultnamespace = "App\Http\Controller";
-
-    protected $getconfigurations;
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
+    protected $description = 'Create a new module structure';
 
     /**
      * Execute the console command.
@@ -53,51 +27,37 @@ class CreateModuleCommand extends Command
      */
     public function handle()
     {
-        $this->info("Laravel crud generator installation process is starting");
-        $this->info("");
-        $this->info("##########################################################");
-        $this->info("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-        $this->info("##########################################################");
-        $this->info("                     =                                    ");
-        $this->info("                    = =                                   ");
-        $this->info("                   =   =                                  ");
-        $this->info("                  =     =                                 ");
-        $this->info("                 =  ===  =                                ");
-        $this->info("                =         =                               ");
-        $this->info("               =           =                              ");
-        $this->info("##########################################################");
-        $this->info("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-        $this->info("##########################################################");
-        $this->info("");
+        $name = $this->argument('name');
 
-    }
+        $this->info("Creating module: {$name}");
 
-    /**
-     * @return $this
-     */
+        // Create module directories
+        $basePath = app_path($name);
 
-    private function getStub(){
-        $stub = ANWAR_CRUD_BASE_PATH.'/stubs/controllerstubs.stub';
-        if (file_exists($stub)){
-            $this->getStub = $stub;
+        if (!is_dir($basePath)) {
+            mkdir($basePath, 0755, true);
+            $this->info("Created directory: {$basePath}");
         }
-        return $this;
+
+        // Create sub-directories
+        $directories = [
+            'Controllers',
+            'Models',
+            'Requests',
+            'Resources',
+            'Services'
+        ];
+
+        foreach ($directories as $dir) {
+            $dirPath = $basePath . '/' . $dir;
+            if (!is_dir($dirPath)) {
+                mkdir($dirPath, 0755, true);
+                $this->info("Created directory: {$dirPath}");
+            }
+        }
+
+        $this->info("Module '{$name}' created successfully!");
+
+        return 0;
     }
-
-    private function getModuleName(){
-
-    }
-
-    /**
-     *
-     */
-
-    private function getConfigurations(){
-        $tabel = MODULE_TABLE;
-        $this->getconfigurations = DB::select(DB::raw("select * from $tabel"));
-    }
-
-
-
-
 }

@@ -1,0 +1,73 @@
+<?php
+
+namespace @controllerNamespace;
+
+use App\Http\Controllers\Controller;
+use @modelNamespace\@modelName;
+use Illuminate\Http\Request;
+@apiUse
+
+/**
+ * @group @controllerName
+ *
+ * Controller for managing @modelName resources.
+ *
+ * @package @controllerNamespace
+ */
+class @controllerName extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Resources\Json\ResourceCollection|\Illuminate\View\View
+     */
+    public function index()
+    {
+        @indexReturn
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  @requestClass  $request
+     * @return @storeReturnType
+     */
+    public function store(@requestClass $request)
+    {
+        @storeReturn
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  @modelName  $@modelVar
+     * @return @showReturnType
+     */
+    public function show(@modelName $@modelVar)
+    {
+        @showReturn
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  @requestClass  $request
+     * @param  @modelName  $@modelVar
+     * @return @updateReturnType
+     */
+    public function update(@requestClass $request, @modelName $@modelVar)
+    {
+        @updateReturn
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  @modelName  $@modelVar
+     * @return @destroyReturnType
+     */
+    public function destroy(@modelName $@modelVar)
+    {
+        @destroyReturn
+    }
+}

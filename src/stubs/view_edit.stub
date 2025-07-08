@@ -1,0 +1,14 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <h1>Edit @modelName</h1>
+    <form action="{{ route('@routeName.update', $@modelVar->id) }}" method="POST">
+        @csrf
+        @method('PUT')
+@fields
+        <button type="submit" class="btn btn-success">Update</button>
+        <a href="{{ route('@routeName.index') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+@endsection

@@ -1,0 +1,13 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <h1>@modelName Details</h1>
+    <table class="table table-bordered">
+        <tbody>
+@fields
+        </tbody>
+    </table>
+    <a href="{{ route('@routeName.index') }}" class="btn btn-secondary">Back to List</a>
+</div>
+@endsection
