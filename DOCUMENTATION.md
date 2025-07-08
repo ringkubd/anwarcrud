@@ -590,7 +590,7 @@ $table->index('user_id');
 
 1. **Clone Repository**
    ```bash
-   git clone https://github.com/anwar/crud-generator.git
+   git clone https://github.com/ringkubd/crud-generator.git
    cd crud-generator
    ```
 
@@ -642,7 +642,7 @@ This package is open-source software licensed under the [MIT License](LICENSE).
 - **Documentation**: [GitHub Wiki](https://github.com/ringkubd/crud-generator/wiki)
 - **Issues**: [GitHub Issues](https://github.com/ringkubd/crud-generator/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/ringkubd/crud-generator/discussions)
-- **Email**: support@ringkubd.com
+- **Email**: support@anwarjahid.com
 
 ---
 

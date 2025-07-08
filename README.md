@@ -1,10 +1,10 @@
 
 # Laravel CRUD Generator
 
-[![Latest Version](https://img.shields.io/github/v/release/anwar/crud-generator)](https://github.com/anwar/crud-generator/releases)
-[![License](https://img.shields.io/github/license/anwar/crud-generator)](LICENSE)
-[![Total Downloads](https://img.shields.io/packagist/dt/anwar/crud-generator)](https://packagist.org/packages/anwar/crud-generator)
-[![Tests](https://github.com/anwar/crud-generator/workflows/Tests/badge.svg)](https://github.com/anwar/crud-generator/actions)
+[![Latest Version](https://img.shields.io/github/v/release/ringkubd/crud-generator)](https://github.com/ringkubd/crud-generator/releases)
+[![License](https://img.shields.io/github/license/ringkubd/crud-generator)](LICENSE)
+[![Total Downloads](https://img.shields.io/packagist/dt/ringkubd/crud-generator)](https://packagist.org/packages/ringkubd/crud-generator)
+[![Tests](https://github.com/ringkubd/crud-generator/workflows/Tests/badge.svg)](https://github.com/ringkubd/crud-generator/actions)
 
 A powerful Laravel package that automates the creation of CRUD operations with advanced features including API generation, comprehensive validation support, and modern UI interface.
 
@@ -282,7 +282,7 @@ public function test_api_can_list_posts()
 - **Full Documentation**: [DOCUMENTATION.md](DOCUMENTATION.md)
 - **API Reference**: Complete API documentation with examples
 - **Video Tutorials**: [Coming Soon]
-- **Wiki**: [GitHub Wiki](https://github.com/anwar/crud-generator/wiki)
+- **Wiki**: [GitHub Wiki](https://github.com/ringkubd/crud-generator/wiki)
 
 ## 🤝 Contributing
 
@@ -291,7 +291,7 @@ We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for deta
 ### Development Setup
 
 ```bash
-git clone https://github.com/anwar/crud-generator.git
+git clone https://github.com/ringkubd/crud-generator.git
 cd crud-generator
 composer install
 cp .env.example .env.testing
@@ -301,7 +301,7 @@ vendor/bin/phpunit
 
 ## 🐛 Bug Reports & Feature Requests
 
-Please use [GitHub Issues](https://github.com/anwar/crud-generator/issues) for:
+Please use [GitHub Issues](https://github.com/ringkubd/crud-generator/issues) for:
 - 🐛 Bug reports
 - 💡 Feature requests  
 - 📝 Documentation improvements
@@ -313,16 +313,16 @@ This package is open-source software licensed under the [MIT License](LICENSE).
 
 ## 🙏 Credits
 
-- **Author**: [Anwar](https://github.com/anwar)
-- **Contributors**: [All Contributors](https://github.com/anwar/crud-generator/contributors)
+- **Author**: [Anwar](https://github.com/ringkubd)
+- **Contributors**: [All Contributors](https://github.com/ringkubd/crud-generator/contributors)
 - **Inspired by**: Laravel community and best practices
 
 ## 🔗 Links
 
-- **Packagist**: [anwar/crud-generator](https://packagist.org/packages/anwar/crud-generator)
-- **GitHub**: [anwar/crud-generator](https://github.com/anwar/crud-generator)
-- **Issues**: [Report Issues](https://github.com/anwar/crud-generator/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/anwar/crud-generator/discussions)
+- **Packagist**: [ringkubd/crud-generator](https://packagist.org/packages/ringkubd/crud-generator)
+- **GitHub**: [ringkubd/crud-generator](https://github.com/ringkubd/crud-generator)
+- **Issues**: [Report Issues](https://github.com/ringkubd/crud-generator/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/ringkubd/crud-generator/discussions)
 
 ---
 
