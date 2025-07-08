@@ -2,53 +2,62 @@
 
 namespace Anwar\CrudGenerator;
 
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\ServiceProvider;
+use Anwar\CrudGenerator\Commands\CrudGeneratorCommand;
+use Anwar\CrudGenerator\Commands\CreateModuleCommand;
 
 class AnwarCrudGeneratorProvider extends ServiceProvider
 {
     /**
      * Register services.
-     *
-     * @return void
      */
     public function register()
     {
         // Load constants file
         require_once __DIR__ . '/constants.php';
-        require_once __DIR__ . '/web.php';
+
+        // Merge package configuration
+        $this->mergeConfigFrom(__DIR__ . '/Configs/anwarcrud.php', 'anwarcrud');
     }
 
     /**
      * Bootstrap services.
-     *
-     * @return void
      */
     public function boot()
     {
-        //
+        // Load package routes
+        $this->loadRoutesFrom(__DIR__ . '/web.php');
+
+        // Load migrations
         $this->loadMigrationsFrom(__DIR__ . '/Migrations');
+
+        // Load views
         $this->loadViewsFrom(__DIR__ . '/views', 'CRUDGENERATOR');
+
+        // Publish assets
         $this->publishes([
             __DIR__ . '/assets' => public_path('vendor/crudgenerator'),
-        ], 'CRUDGENERATOR');
+        ], 'crudgenerator-assets');
 
+        // Publish migrations
         $this->publishes([
             __DIR__ . '/Migrations' => database_path('migrations')
-        ], 'CRUDGENERATOR');
+        ], 'crudgenerator-migrations');
 
-        /**
-         * @desc Register Configs file
-         */
+        // Publish configuration
+        $this->publishes([
+            __DIR__ . '/Configs/anwarcrud.php' => config_path('anwarcrud.php'),
+        ], 'crudgenerator-config');
 
-        $configFile = [];
-        foreach (new \DirectoryIterator(__DIR__ . '/Configs') as $file) {
-            if ($file->isFile()) {
-                $configFile[__DIR__ . '/Configs/' . $file->getFilename()] = config_path($file->getFilename());
-            }
-        }
+        // Publish views for customization
+        $this->publishes([
+            __DIR__ . '/views' => resource_path('views/vendor/crudgenerator'),
+        ], 'crudgenerator-views');
 
-        $this->publishes($configFile, 'CRUDGENERATOR');
+        // Publish stubs for customization
+        $this->publishes([
+            __DIR__ . '/stubs' => resource_path('crud-stubs'),
+        ], 'crudgenerator-stubs');
 
         // Register commands
         if ($this->app->runningInConsole()) {

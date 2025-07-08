@@ -1,150 +1,331 @@
 
-# Laravel CRUD Generator (anwar/crud-generator)
+# Laravel CRUD Generator
 
-A powerful, interactive Laravel package to generate complete CRUD (Create, Read, Update, Delete) scaffolding for your Laravel 8/9/10/11+ projects. This package helps you rapidly scaffold models, migrations, controllers (API or web), form requests, resources, and Blade views, with support for relationships and soft deletes.
+[![Latest Version](https://img.shields.io/github/v/release/anwar/crud-generator)](https://github.com/anwar/crud-generator/releases)
+[![License](https://img.shields.io/github/license/anwar/crud-generator)](LICENSE)
+[![Total Downloads](https://img.shields.io/packagist/dt/anwar/crud-generator)](https://packagist.org/packages/anwar/crud-generator)
+[![Tests](https://github.com/anwar/crud-generator/workflows/Tests/badge.svg)](https://github.com/anwar/crud-generator/actions)
 
----
+A powerful Laravel package that automates the creation of CRUD operations with advanced features including API generation, comprehensive validation support, and modern UI interface.
 
-## Features
+## ✨ Features
 
-- **Interactive Artisan Command**: Step-by-step prompts for module name, fields, relationships, and options.
-- **Model Generation**: With fillable fields, relationships, PHPDoc, and optional soft deletes.
-- **Migration Generation**: With all specified fields and relationships.
-- **Controller Generation**: API or web, with full CRUD methods.
-- **Form Request Generation**: For validation rules.
-- **Resource Generation**: For API responses.
-- **Blade View Generation**: index, create, edit, show (Bootstrap styled).
-- **Automatic Route Registration**: Adds routes to `web.php` or `api.php`.
-- **Supports Laravel 8, 9, 10, 11+**
+- 🚀 **Complete CRUD Generation** - Models, Controllers, Views, Migrations, Requests, Resources
+- 🎨 **Modern UI Interface** - Bootstrap 4 with live preview and advanced field configuration
+- ✅ **Full Validation Support** - All Laravel validation rules with visual builder
+- 🔗 **API Generation** - RESTful controllers and JSON resources
+- 📚 **Auto Documentation** - Generate API docs in Markdown and HTML
+- ⚡ **CLI Integration** - Artisan commands for automation
+- 🧪 **Test Generation** - Feature and unit tests included
+- 🎯 **Customizable Templates** - Stub-based system for full customization
 
----
+## 📋 Requirements
 
-## Installation
+- PHP 8.1 or higher
+- Laravel 10.0 or higher
+- MySQL 5.7+ or PostgreSQL 10+
 
-1. **Require the package** (if using as a Composer dependency):
+## 🚀 Quick Start
+
+### Installation
 
 ```bash
 composer require anwar/crud-generator
 ```
 
-2. **(If developing locally)**: Add to your `composer.json` repositories and require as `path` type, or symlink into `vendor/`.
-
-3. **Publish assets/config (optional):**
+### Publish and Setup
 
 ```bash
-php artisan vendor:publish --provider="Anwar\\CrudGenerator\\AnwarCrudGeneratorProvider"
-```
-
-4. **Register the Service Provider** (if not auto-discovered):
-
-Add to `config/app.php`:
-```php
-'providers' => [
-    // ...
-    Anwar\\CrudGenerator\\AnwarCrudGeneratorProvider::class,
-],
-```
-
----
-
-## Usage
-
-### Interactive Command
-
-Run the following Artisan command:
-
-```bash
-php artisan anwar:crudgenerator
-```
-
-Or, for local development/testing (see `TestCrudCommand.php`):
-
-```bash
-php artisan test:crud {ModuleName} --fields="field:type,field2:type" [--api] [--softdeletes] [--relationships="rel:type,..."]
-```
-
-#### Example:
-
-```bash
-php artisan test:crud Product --fields="name:string,price:decimal,description:text" --softdeletes --relationships="user:belongsTo,comments:hasMany"
-```
-
-#### Options:
-- `module` (argument): Name of the module (e.g. `Post`)
-- `--fields`: Comma-separated list of fields (e.g. `title:string,body:text`)
-- `--api`: Generate API controller and routes
-- `--softdeletes`: Add soft deletes to the model
-- `--relationships`: Comma-separated relationships (e.g. `user:belongsTo,comments:hasMany`)
-
----
-
-## What Gets Generated?
-
-- **Model**: `app/Models/{Module}.php`
-- **Migration**: `database/migrations/{timestamp}_create_{modules}_table.php`
-- **Controller**: `app/Http/Controllers/{Module}Controller.php` or `app/Http/Controllers/Api/{Module}Controller.php`
-- **Form Request**: `app/Http/Requests/{Module}Request.php`
-- **Resource**: `app/Http/Resources/{Module}Resource.php`
-- **Views**: `resources/views/{module}/index.blade.php`, `create.blade.php`, `edit.blade.php`, `show.blade.php`
-- **Routes**: Added to `routes/web.php` or `routes/api.php`
-
----
-
-## Example Workflow
-
-1. **Generate a CRUD for a Blog Post:**
-
-```bash
-php artisan anwar:crudgenerator
-# or
-php artisan test:crud Post --fields="title:string,body:text,published:boolean" --relationships="user:belongsTo,comments:hasMany"
-```
-
-2. **Check generated files:**
-   - Model: `app/Models/Post.php`
-   - Migration: `database/migrations/xxxx_xx_xx_create_posts_table.php`
-   - Controller: `app/Http/Controllers/PostController.php`
-   - Views: `resources/views/post/`
-   - Routes: `routes/web.php`
-
-3. **Run migrations:**
-
-```bash
+php artisan vendor:publish --provider="Anwar\CrudGenerator\AnwarCrudGeneratorProvider"
 php artisan migrate
 ```
 
-4. **Visit your app and use the generated CRUD!**
+### Access the Generator
+
+Visit: `http://your-app.com/admin/anwar-crud-generator`
+
+## 🎯 Usage Examples
+
+### Web Interface
+
+1. **Access the Generator Interface**
+   ```
+   http://your-app.com/admin/anwar-crud-generator
+   ```
+
+2. **Configure Your Module**
+   - **Module Name**: `Post`
+   - **Fields**: 
+     - `title` (string, required|max:255)
+     - `content` (text, required)
+     - `status` (boolean)
+     - `published_at` (datetime, nullable)
+   - **Relationships**: 
+     - `user` (belongsTo User)
+     - `comments` (hasMany Comment)
+   - **Options**: ✓ API, ✓ Soft Deletes
+
+3. **Preview and Generate**
+   - Use live preview to review generated code
+   - Click "Generate" to create all files
+
+### CLI Commands
+
+```bash
+# Generate via Artisan
+php artisan anwar-crud:generate Post \
+  --fields="title:string,content:text,status:boolean" \
+  --relationships="user:belongsTo" \
+  --api \
+  --soft-deletes
+
+# List generated modules
+php artisan anwar-crud:list
+
+# Delete module
+php artisan anwar-crud:delete Post --force
+```
+
+### API Usage
+
+```bash
+# Generate via API
+curl -X POST http://your-app.com/api/crud-modules \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer your-token" \
+  -d '{
+    "module": "Product",
+    "fields": "name:string,price:decimal,description:text",
+    "relationships": "category:belongsTo",
+    "api": true,
+    "softdeletes": false
+  }'
+
+# List modules
+curl -X GET http://your-app.com/api/crud-modules \
+  -H "Authorization: Bearer your-token"
+```
+
+## 📁 Generated Files
+
+When you generate a `Post` module, you'll get:
+
+```
+app/
+├── Models/Post.php                    # Eloquent model with relationships
+├── Http/
+│   ├── Controllers/
+│   │   ├── PostController.php         # Web controller
+│   │   └── Api/PostController.php     # API controller
+│   ├── Requests/PostRequest.php       # Form validation
+│   └── Resources/PostResource.php     # API resource
+resources/views/posts/                 # Bootstrap 4 views
+├── index.blade.php                    # List view with DataTables
+├── create.blade.php                   # Create form
+├── edit.blade.php                     # Edit form
+└── show.blade.php                     # Detail view
+database/migrations/
+└── create_posts_table.php             # Database migration
+tests/
+├── Feature/PostTest.php               # Feature tests
+└── Unit/PostTest.php                  # Unit tests
+```
+
+## 🎨 Advanced Features
+
+### Field Types & Validation
+
+Support for all Laravel field types and validation rules:
+
+```php
+'fields' => [
+    ['name' => 'email', 'type' => 'string', 'validation' => 'required|email|unique:users'],
+    ['name' => 'age', 'type' => 'integer', 'validation' => 'required|integer|min:18|max:65'],
+    ['name' => 'bio', 'type' => 'text', 'validation' => 'nullable|string|max:1000'],
+    ['name' => 'avatar', 'type' => 'string', 'validation' => 'nullable|image|max:2048'],
+    ['name' => 'settings', 'type' => 'json', 'validation' => 'nullable|array'],
+    ['name' => 'salary', 'type' => 'decimal', 'validation' => 'required|numeric|min:0'],
+]
+```
+
+### Complex Relationships
+
+```php
+'relationships' => [
+    [
+        'name' => 'user',
+        'type' => 'belongsTo',
+        'model' => 'User',
+        'foreign_key' => 'user_id'
+    ],
+    [
+        'name' => 'tags',
+        'type' => 'belongsToMany',
+        'model' => 'Tag',
+        'pivot_table' => 'post_tags'
+    ]
+]
+```
+
+### API Features
+
+Generated API controllers include:
+
+- ✅ RESTful endpoints (GET, POST, PUT, DELETE)
+- ✅ JSON API resources with data transformation
+- ✅ Proper HTTP status codes
+- ✅ Error handling and validation
+- ✅ Pagination support
+- ✅ Rate limiting ready
+
+Example API endpoints:
+```
+GET    /api/posts           # List all posts
+POST   /api/posts           # Create new post
+GET    /api/posts/{id}      # Get specific post
+PUT    /api/posts/{id}      # Update post
+DELETE /api/posts/{id}      # Delete post
+```
+
+## 🔧 Configuration
+
+Customize the package behavior in `config/anwarcrud.php`:
+
+```php
+return [
+    'model_namespace' => 'App\\Models',
+    'controller_namespace' => 'App\\Http\\Controllers',
+    'view_path' => 'resources/views',
+    
+    'features' => [
+        'api_generation' => true,
+        'test_generation' => true,
+        'documentation_generation' => true,
+        'soft_deletes' => true,
+    ],
+    
+    'ui' => [
+        'theme' => 'bootstrap4',
+        'show_preview' => true,
+        'enable_live_preview' => true,
+    ],
+];
+```
+
+## 🎯 Customization
+
+### Custom Templates
+
+1. Publish stubs:
+   ```bash
+   php artisan vendor:publish --tag=anwar-crud-stubs
+   ```
+
+2. Modify templates in `resources/crud-stubs/`
+
+3. Use custom placeholders:
+   - `@modelName` - Model class name
+   - `@modelVar` - Model variable name
+   - `@fields` - Generated fields
+   - `@relationships` - Generated relationships
+
+### Custom Field Types
+
+Add custom field types:
+
+```php
+'custom_fields' => [
+    'phone' => [
+        'migration_type' => 'string',
+        'validation' => 'required|string|regex:/^[0-9\-\+\s\(\)]+$/',
+        'input_type' => 'tel'
+    ]
+]
+```
+
+## 🧪 Testing
+
+Run package tests:
+
+```bash
+vendor/bin/phpunit packages/CrudGenerator/tests/
+```
+
+Generated modules include comprehensive tests:
+
+```php
+// Feature Test Example
+public function test_can_create_post()
+{
+    $data = ['title' => 'Test Post', 'content' => 'Test Content'];
+    
+    $response = $this->post(route('posts.store'), $data);
+    
+    $response->assertRedirect(route('posts.index'));
+    $this->assertDatabaseHas('posts', $data);
+}
+
+// API Test Example  
+public function test_api_can_list_posts()
+{
+    Post::factory(3)->create();
+    
+    $response = $this->getJson('/api/posts');
+    
+    $response->assertOk()
+             ->assertJsonCount(3, 'data');
+}
+```
+
+## 📖 Documentation
+
+- **Full Documentation**: [DOCUMENTATION.md](DOCUMENTATION.md)
+- **API Reference**: Complete API documentation with examples
+- **Video Tutorials**: [Coming Soon]
+- **Wiki**: [GitHub Wiki](https://github.com/anwar/crud-generator/wiki)
+
+## 🤝 Contributing
+
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+
+### Development Setup
+
+```bash
+git clone https://github.com/anwar/crud-generator.git
+cd crud-generator
+composer install
+cp .env.example .env.testing
+php artisan key:generate --env=testing
+vendor/bin/phpunit
+```
+
+## 🐛 Bug Reports & Feature Requests
+
+Please use [GitHub Issues](https://github.com/anwar/crud-generator/issues) for:
+- 🐛 Bug reports
+- 💡 Feature requests  
+- 📝 Documentation improvements
+- ❓ Questions and support
+
+## 📄 License
+
+This package is open-source software licensed under the [MIT License](LICENSE).
+
+## 🙏 Credits
+
+- **Author**: [Anwar](https://github.com/anwar)
+- **Contributors**: [All Contributors](https://github.com/anwar/crud-generator/contributors)
+- **Inspired by**: Laravel community and best practices
+
+## 🔗 Links
+
+- **Packagist**: [anwar/crud-generator](https://packagist.org/packages/anwar/crud-generator)
+- **GitHub**: [anwar/crud-generator](https://github.com/anwar/crud-generator)
+- **Issues**: [Report Issues](https://github.com/anwar/crud-generator/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/anwar/crud-generator/discussions)
 
 ---
 
-## Advanced
+⭐ **Star this repo** if you find it useful!
 
-- **API Mode**: Use `--api` to generate API controllers/resources/routes only.
-- **Soft Deletes**: Use `--softdeletes` to add soft delete support to your model and migration.
-- **Relationships**: Use `--relationships` to define Eloquent relationships (e.g. `user:belongsTo,comments:hasMany`).
-
----
-
-## Customization
-
-- **Stubs**: You can customize the stub files in `packages/CrudGenerator/src/stubs/` to change the generated code style.
-- **Views**: Edit the generated Blade files for your own UI/UX needs.
-
----
-
-## Contributing
-
-Pull requests and issues are welcome! Please fork the repo and submit your improvements.
-
----
-
-## Credits
-
-- Developed by Anwar
-- Inspired by Laravel community best practices
-
----
-
-## License
-
-MIT
+*Made with ❤️ for the Laravel community*

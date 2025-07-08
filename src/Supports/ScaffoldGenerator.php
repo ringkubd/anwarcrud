@@ -8,7 +8,7 @@ class ScaffoldGenerator
     {
         $stub = file_get_contents($stubPath);
         $modelName = ucfirst($scaffold['module']);
-        $namespace = 'App\\Models';
+        $namespace = config('anwarcrud.model_namespace', 'App\\Models');
         $table = strtolower(str_plural($scaffold['module']));
         $fillable = collect($scaffold['fields'])->pluck('name')->map(function ($f) {
             return "'{$f}'";
@@ -22,9 +22,9 @@ class ScaffoldGenerator
         foreach ($scaffold['relationships'] as $rel) {
             $relName = $rel['name'];
             $relType = $rel['type'];
-            $relModel = 'App\\Models\\' . ucfirst($relName);
+            $relModel = $namespace . '\\' . ucfirst($relName);
             $relations .= "    public function {$relName}() { return \$this->{$relType}('{$relModel}'); }\n";
-            $docProperties .= " * @property-read \\Illuminate\\Database\\Eloquent\\Collection|App\\Models\\" . ucfirst($relName) . "[] \$" . $relName . "\n";
+            $docProperties .= " * @property-read \\Illuminate\\Database\\Eloquent\\Collection|{$namespace}\\" . ucfirst($relName) . "[] \$" . $relName . "\n";
         }
         $softDeletesUse = $scaffold['softdeletes'] ? "use Illuminate\\Database\\Eloquent\\SoftDeletes;\n    use SoftDeletes;" : '';
         $softDeletesTrait = $scaffold['softdeletes'] ? "    use SoftDeletes;\n" : '';
@@ -185,17 +185,38 @@ class ScaffoldGenerator
     {
         $stub = file_get_contents($stubPath);
         $requestClass = ucfirst($scaffold['module']) . 'Request';
+        $requestNamespace = config('anwarcrud.controller_namespace', 'App\\Http\\Controllers') . '\\..\\Requests';
+        $requestNamespace = str_replace('\\..\\', '\\', $requestNamespace);
+
+        // Build validation rules
         $rules = '';
+        $attributes = '';
+
         foreach ($scaffold['fields'] as $field) {
-            $rules .= "            '{$field['name']}' => 'required',\n";
+            $fieldName = $field['name'];
+            $validation = $field['validation'] ?? 'nullable';
+            $label = $field['label'] ?? ucwords(str_replace('_', ' ', $fieldName));
+
+            $rules .= "            '{$fieldName}' => '{$validation}',\n";
+            $attributes .= "            '{$fieldName}' => '{$label}',\n";
         }
+
         $stub = str_replace([
+            '@requestNamespace',
             '@requestClass',
-            '@rules',
+            '@modelName',
+            '@validationRules',
+            '@fieldAttributes',
+            '@rules', // Legacy support
         ], [
+            $requestNamespace,
             $requestClass,
+            ucfirst($scaffold['module']),
             $rules,
+            $attributes,
+            $rules, // Legacy support
         ], $stub);
+
         file_put_contents($outputPath, $stub);
     }
 
@@ -222,14 +243,16 @@ class ScaffoldGenerator
         $stub = file_get_contents($stubPath);
         $modelName = ucfirst($scaffold['module']);
         $modelVar = lcfirst($modelName);
-        $namespace = $scaffold['api'] ? 'App\\Http\\Controllers\\Api' : 'App\\Http\\Controllers';
-        $modelNamespace = 'App\\Models';
+        $controllerNamespace = config('anwarcrud.controller_namespace', 'App\\Http\\Controllers');
+        $namespace = $scaffold['api'] ? $controllerNamespace . '\\Api' : $controllerNamespace;
+        $modelNamespace = config('anwarcrud.model_namespace', 'App\\Models');
         $controllerName = $modelName . 'Controller';
-        $apiUse = $scaffold['api'] ? "use App\\Http\\Resources\\{$modelName}Resource;" : '';
+        $apiUse = $scaffold['api'] ? "use {$controllerNamespace}\\..\\Resources\\{$modelName}Resource;" : '';
+        $apiUse = str_replace('\\..\\', '\\', $apiUse);
 
         // Use FormRequest for validation
         $requestClass = $scaffold['api']
-            ? "App\\Http\\Requests\\{$modelName}Request"
+            ? str_replace('Controllers', 'Requests', $controllerNamespace) . "\\{$modelName}Request"
             : 'Request';
 
         // Return types for docblocks
