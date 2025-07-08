@@ -3,7 +3,7 @@
 
 [![Latest Version](https://img.shields.io/github/v/release/ringkubd/crud-generator)](https://github.com/ringkubd/anwarcrud/releases)
 [![License](https://img.shields.io/github/license/ringkubd/crud-generator)](LICENSE)
-[![Total Downloads](https://img.shields.io/packagist/dt/ringkubd/crud-generator)](https://packagist.org/packages/ringkubd/crud-generator)
+[![Total Downloads](https://img.shields.io/packagist/dt/ringkubd/crud-generator)](https://packagist.org/packages/anwar/crud-generator)
 [![Tests](https://github.com/ringkubd/anwarcrud/workflows/Tests/badge.svg)](https://github.com/ringkubd/anwarcrud/actions)
 
 A powerful Laravel package that automates the creation of CRUD operations with advanced features including API generation, comprehensive validation support, and modern UI interface.
@@ -319,7 +319,7 @@ This package is open-source software licensed under the [MIT License](LICENSE).
 
 ## 🔗 Links
 
-- **Packagist**: [ringkubd/crud-generator](https://packagist.org/packages/ringkubd/crud-generator)
+- **Packagist**: [ringkubd/crud-generator](https://packagist.org/packages/anwar/crud-generator)
 - **GitHub**: [ringkubd/crud-generator](https://github.com/ringkubd/anwarcrud)
 - **Issues**: [Report Issues](https://github.com/ringkubd/anwarcrud/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/ringkubd/anwarcrud/discussions)
