@@ -15,9 +15,9 @@ class AnwarCrudGenerator extends Migration
     {
         Schema::create(TABLE_NAME, function (Blueprint $table) {
             $table->bigIncrements("id");
-            $table->string('name',255);
-            $table->string('controllers',255);
-            $table->string('uri',255);
+            $table->string('name', 255);
+            $table->string('controllers', 255);
+            $table->string('uri', 255);
             $table->timestamps();
         });
     }
@@ -29,8 +29,6 @@ class AnwarCrudGenerator extends Migration
      */
     public function down()
     {
-        Schema::table('anwar_crud_generator', static function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('anwar_crud_generator');
     }
 }

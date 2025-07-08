@@ -20,13 +20,13 @@ composer require anwar/crud-generator
 
 ### Step 2: Publish Package Assets
 
-The package will auto-register via Laravel's package discovery. Publish the required assets:
+⚠️ **IMPORTANT**: The package does NOT automatically run migrations to protect your existing database. You must manually publish and run them.
 
 ```bash
 # Publish configuration file
 php artisan vendor:publish --tag=crudgenerator-config
 
-# Publish migrations
+# Publish migrations (REQUIRED)
 php artisan vendor:publish --tag=crudgenerator-migrations
 
 # Publish assets (CSS, JS)
@@ -41,7 +41,14 @@ php artisan vendor:publish --tag=crudgenerator-stubs
 
 ### Step 3: Run Migrations
 
+⚠️ **CRITICAL**: Only run migrations AFTER reviewing them to ensure they don't conflict with your existing database:
+
 ```bash
+# Review the published migrations first
+ls database/migrations/*crudgenerator*
+ls database/migrations/*anwar*
+
+# Only run migrations after confirming they're safe
 php artisan migrate
 ```
 
@@ -262,3 +269,8 @@ Enable debug logging:
 ## License
 
 This package is open-source software licensed under the MIT License.
+
+---
+**GitHub:** https://github.com/ringkubd/anwarcrud
+**Packagist:** https://packagist.org/packages/anwar/crud-generator
+**Author:** [Anwar Jahid](https://anwarjahid.com) | ajr.jahid@gmail.com

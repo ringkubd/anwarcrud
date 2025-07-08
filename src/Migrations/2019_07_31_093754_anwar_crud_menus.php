@@ -15,10 +15,10 @@ class AnwarCrudMenus extends Migration
     {
         Schema::create(ANWAR_CRUD_MENUS, function (Blueprint $table) {
             $table->bigIncrements("id");
-            $table->string("name",255);
-            $table->string("controllers",255);
-            $table->string("methods",255);
-            $table->string("uri",255);
+            $table->string("name", 255);
+            $table->string("controllers", 255);
+            $table->string("methods", 255);
+            $table->string("uri", 255);
             $table->timestamps();
         });
     }
@@ -30,8 +30,6 @@ class AnwarCrudMenus extends Migration
      */
     public function down()
     {
-        Schema::table('anwar_crud_generator', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('anwar_crud_menus');
     }
 }

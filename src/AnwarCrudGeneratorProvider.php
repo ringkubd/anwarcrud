@@ -28,8 +28,9 @@ class AnwarCrudGeneratorProvider extends ServiceProvider
         // Load package routes
         $this->loadRoutesFrom(__DIR__ . '/web.php');
 
-        // Load migrations
-        $this->loadMigrationsFrom(__DIR__ . '/Migrations');
+        // DON'T automatically load migrations - let users publish and run them manually
+        // This prevents accidentally running migrations on existing projects
+        // $this->loadMigrationsFrom(__DIR__ . '/Migrations');
 
         // Load views
         $this->loadViewsFrom(__DIR__ . '/views', 'CRUDGENERATOR');
@@ -64,6 +65,7 @@ class AnwarCrudGeneratorProvider extends ServiceProvider
             $this->commands([
                 CrudGeneratorCommand::class,
                 CreateModuleCommand::class,
+                Commands\SafetyCheckCommand::class,
             ]);
         }
     }

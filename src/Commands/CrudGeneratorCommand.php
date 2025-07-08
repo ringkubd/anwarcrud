@@ -189,14 +189,9 @@ class CrudGeneratorCommand extends Command
         } else {
             $this->info('Route already exists in: ' . $routePath);
         }
-    }
 
-    private function runMigrate()
-    {
-        foreach (new \DirectoryIterator(ANWAR_CRUD_BASE_PATH . "/Migrations") as $directoryIterator) {
-            if ($directoryIterator->isFile()) {
-                $this->call("migrate", ["--path" => "vendor/anwar/crud-generator/src/Migrations/{$directoryIterator->getBasename()}"]);
-            }
-        }
+        $this->info("");
+        $this->info("✅ CRUD generation completed successfully!");
+        $this->info("📝 Don't forget to run 'php artisan migrate' to create the database table.");
     }
 }

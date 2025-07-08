@@ -642,7 +642,8 @@ This package is open-source software licensed under the [MIT License](LICENSE).
 - **Documentation**: [GitHub Wiki](https://github.com/ringkubd/anwarcrud/wiki)
 - **Issues**: [GitHub Issues](https://github.com/ringkubd/anwarcrud/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/ringkubd/anwarcrud/discussions)
-- **Email**: support@anwarjahid.com
+- **Packagist**: https://packagist.org/packages/anwar/crud-generator
+- **Author**: [Anwar Jahid](https://anwarjahid.com) | ajr.jahid@gmail.com
 
 ---
 

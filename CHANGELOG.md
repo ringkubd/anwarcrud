@@ -147,6 +147,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Full Documentation](DOCUMENTATION.md)
 - [README](README.md)
 - [Contributing Guidelines](CONTRIBUTING.md)
+- [GitHub](https://github.com/ringkubd/anwarcrud)
+- [Packagist](https://packagist.org/packages/anwar/crud-generator)
+- [Author](https://anwarjahid.com) | ajr.jahid@gmail.com
 
 ---
 

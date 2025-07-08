@@ -1,7 +1,7 @@
 {
     "name": "anwar/crud-generator",
-    "version": "2.0.0",
-    "description": "A powerful Laravel package for generating CRUD operations with advanced UI, validation, API generation, and comprehensive testing support.",
+    "version": "2.1.0",
+    "description": "A powerful Laravel package for generating CRUD operations with advanced UI, validation, API generation, and comprehensive testing support. Database-safe with manual migration control.",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -12,7 +12,7 @@
             "role": "Developer"
         }
     ],
-    "homepage": "https://github.com/ringkubd/crud-generator",
+    "homepage": "https://github.com/ringkubd/anwarcrud",
     "keywords": [
         "laravel",
         "crud",
@@ -21,7 +21,9 @@
         "api",
         "validation",
         "bootstrap",
-        "admin"
+        "admin",
+        "database-safe",
+        "no-auto-migrate"
     ],
     "minimum-stability": "stable",
     "prefer-stable": true,

@@ -1,12 +1,20 @@
-
 # Laravel CRUD Generator
 
-[![Latest Version](https://img.shields.io/github/v/release/ringkubd/crud-generator)](https://github.com/ringkubd/anwarcrud/releases)
-[![License](https://img.shields.io/github/license/ringkubd/crud-generator)](LICENSE)
-[![Total Downloads](https://img.shields.io/packagist/dt/ringkubd/crud-generator)](https://packagist.org/packages/anwar/crud-generator)
+[![Latest Version](https://img.shields.io/github/v/release/ringkubd/anwarcrud)](https://github.com/ringkubd/anwarcrud/releases)
+[![License](https://img.shields.io/github/license/ringkubd/anwarcrud)](LICENSE)
+[![Total Downloads](https://img.shields.io/packagist/dt/anwar/crud-generator)](https://packagist.org/packages/anwar/crud-generator)
 [![Tests](https://github.com/ringkubd/anwarcrud/workflows/Tests/badge.svg)](https://github.com/ringkubd/anwarcrud/actions)
 
 A powerful Laravel package that automates the creation of CRUD operations with advanced features including API generation, comprehensive validation support, and modern UI interface.
+
+## 🚨 Important Safety Notice
+
+**⚠️ ALWAYS BACKUP YOUR DATABASE BEFORE INSTALLATION**
+
+This package includes migrations. For your safety:
+- Migrations are NOT automatically run
+- You must manually publish and review them
+- See [SAFETY-NOTICE.md](SAFETY-NOTICE.md) for complete safety guidelines
 
 ## ✨ Features
 
@@ -18,6 +26,7 @@ A powerful Laravel package that automates the creation of CRUD operations with a
 - ⚡ **CLI Integration** - Artisan commands for automation
 - 🧪 **Test Generation** - Feature and unit tests included
 - 🎯 **Customizable Templates** - Stub-based system for full customization
+- 🛡️ **Database Safe** - No automatic migrations, full user control
 
 ## 📋 Requirements
 
@@ -27,16 +36,24 @@ A powerful Laravel package that automates the creation of CRUD operations with a
 
 ## 🚀 Quick Start
 
-### Installation
+### Safe Installation
 
 ```bash
+# 1. BACKUP YOUR DATABASE FIRST!
+mysqldump -u user -p database_name > backup.sql
+
+# 2. Install the package
 composer require anwar/crud-generator
-```
 
-### Publish and Setup
+# 3. Publish assets (migrations will NOT auto-run)
+php artisan vendor:publish --tag=crudgenerator-config
+php artisan vendor:publish --tag=crudgenerator-migrations
+php artisan vendor:publish --tag=crudgenerator-assets
 
-```bash
-php artisan vendor:publish --provider="Anwar\CrudGenerator\AnwarCrudGeneratorProvider"
+# 4. Review published migrations first!
+ls database/migrations/*anwar*
+
+# 5. Only run if safe
 php artisan migrate
 ```
 
@@ -291,7 +308,7 @@ We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for deta
 ### Development Setup
 
 ```bash
-git clone https://github.com/ringkubd/anwarcrud.git
+git clone https://github.com/ringkubd/crud-generator.git
 cd crud-generator
 composer install
 cp .env.example .env.testing
@@ -313,14 +330,14 @@ This package is open-source software licensed under the [MIT License](LICENSE).
 
 ## 🙏 Credits
 
-- **Author**: [Anwar](https://github.com/ringkubd)
+- **Author**: [Anwar Jahid](https://anwarjahid.com) | ajr.jahid@gmail.com
 - **Contributors**: [All Contributors](https://github.com/ringkubd/anwarcrud/contributors)
 - **Inspired by**: Laravel community and best practices
 
 ## 🔗 Links
 
-- **Packagist**: [ringkubd/crud-generator](https://packagist.org/packages/anwar/crud-generator)
-- **GitHub**: [ringkubd/crud-generator](https://github.com/ringkubd/anwarcrud)
+- **Packagist**: [anwar/crud-generator](https://packagist.org/packages/anwar/crud-generator)
+- **GitHub**: [ringkubd/anwarcrud](https://github.com/ringkubd/anwarcrud)
 - **Issues**: [Report Issues](https://github.com/ringkubd/anwarcrud/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/ringkubd/anwarcrud/discussions)
 
