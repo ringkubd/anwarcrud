@@ -256,8 +256,8 @@ Enable debug logging:
 ## Support
 
 - **Documentation:** [Full Documentation](DOCUMENTATION.md)
-- **Issues:** [GitHub Issues](https://github.com/ringkubd/crud-generator/issues)
-- **Wiki:** [GitHub Wiki](https://github.com/ringkubd/crud-generator/wiki)
+- **Issues:** [GitHub Issues](https://github.com/ringkubd/anwarcrud/issues)
+- **Wiki:** [GitHub Wiki](https://github.com/ringkubd/anwarcrud/wiki)
 
 ## License
 
